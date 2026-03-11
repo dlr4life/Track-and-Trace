@@ -1,47 +1,65 @@
-# Proprietary License — T&T Run
+PROPRIETARY LICENSE - T&T Run
 
 Copyright (c) 2026 Minute Long Solutions, LLC. All Rights Reserved.
 
----
+================================================================================
+1. OWNERSHIP
+================================================================================
 
-## 1. Ownership
+This repository, including but not limited to all source code, documentation,
+assets, configuration files, and any other materials contained herein
+(collectively, the "Work"), is the exclusive property of the rights holder.
+The Work is protected by copyright, and no title or interest in the Work is
+transferred to you.
 
-This repository, including but not limited to all source code, documentation, assets, configuration files, and any other materials contained herein (collectively, the "Work"), is the exclusive property of the rights holder. The Work is protected by copyright, and no title or interest in the Work is transferred to you.
-
----
-
-## 2. Restrictions — No Use Without Permission
+================================================================================
+2. RESTRICTIONS - NO USE WITHOUT PERMISSION
+================================================================================
 
 You may not, without prior written permission from the rights holder:
 
-- Use the Work, in whole or in part, for any purpose (including personal, educational, commercial, or internal use).
-- Copy, reproduce, or duplicate the Work, in whole or in part, by any means.
-- Distribute, publish, transmit, or make available the Work, or any portion of it, to any third party.
-- Modify, adapt, translate, or create derivative works based on the Work.
-- Reverse engineer, decompile, or disassemble the Work, except to the limited extent expressly permitted by applicable law.
-- Sublicense, rent, lease, or lend the Work or any right under this license.
-- Remove or alter any copyright, proprietary, or other notices in or on the Work.
+  * Use the Work, in whole or in part, for any purpose (including personal,
+    educational, commercial, or internal use).
+  * Copy, reproduce, or duplicate the Work, in whole or in part, by any means.
+  * Distribute, publish, transmit, or make available the Work, or any portion
+    of it, to any third party.
+  * Modify, adapt, translate, or create derivative works based on the Work.
+  * Reverse engineer, decompile, or disassemble the Work, except to the
+    limited extent expressly permitted by applicable law.
+  * Sublicense, rent, lease, or lend the Work or any right under this license.
+  * Remove or alter any copyright, proprietary, or other notices in or on
+    the Work.
 
-Any use, duplication, distribution, modification, or other action not expressly authorized in writing by the rights holder is prohibited and may result in legal action.
+Any use, duplication, distribution, modification, or other action not expressly
+authorized in writing by the rights holder is prohibited and may result in
+legal action.
 
----
+================================================================================
+3. NO GRANT OF RIGHTS
+================================================================================
 
-## 3. No Grant of Rights
+Except as may be expressly set forth in a separate, signed written agreement
+with the rights holder, no license, right, or interest in the Work is granted
+to you. All rights not expressly granted are reserved.
 
-Except as may be expressly set forth in a separate, signed written agreement with the rights holder, no license, right, or interest in the Work is granted to you. All rights not expressly granted are reserved.
+================================================================================
+4. DISCLAIMER
+================================================================================
 
----
+THE WORK IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE RIGHTS HOLDER
+DISCLAIMS ALL WARRANTIES AND SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGE, OR
+OTHER LIABILITY ARISING FROM OR RELATED TO THE WORK OR ITS USE.
 
-## 4. Disclaimer
+================================================================================
+5. CONTACT
+================================================================================
 
-THE WORK IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE RIGHTS HOLDER DISCLAIMS ALL WARRANTIES AND SHALL NOT BE LIABLE FOR ANY CLAIM, DAMAGE, OR OTHER LIABILITY ARISING FROM OR RELATED TO THE WORK OR ITS USE.
+For permission requests or inquiries regarding use of this repository or the
+Work, contact the rights holder. Unauthorized use is strictly prohibited.
 
----
+================================================================================
 
-## 5. Contact
-
-For permission requests or inquiries regarding use of this repository or the Work, contact the rights holder. Unauthorized use is strictly prohibited.
-
----
-
-*This license is legally binding. By accessing, copying, or using the Work in any way, you acknowledge that you have read, understood, and agree to be bound by these terms.*
+This license is legally binding. By accessing, copying, or using the Work in
+any way, you acknowledge that you have read, understood, and agree to be bound
+by these terms.
