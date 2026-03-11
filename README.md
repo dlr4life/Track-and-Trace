@@ -36,4 +36,4 @@ Track & Trace for the field. A mobile app that shows your live position on a map
 
 This repository and all of its contents are proprietary. Use, duplication, distribution, modification, and all other uses are not permitted without prior written permission from the rights holder.
 
-See [LICENSE](../LICENSE) for full terms.
+See [LICENSE](LICENSE) for full terms.
