@@ -6,18 +6,29 @@
 //  When the backend supports GeoEvent/Stream Service, load the stream layer and add to map.
 //
 
+import ArcGIS
 import Combine
 import Foundation
 
 /// When backend supports it, use a stream layer for real-time position updates.
-/// Configure useStreamLayer in Settings; integrate with your ArcGIS Stream Layer type when available.
+/// Configure useStreamLayer and streamServiceURL in Settings.
 @MainActor
 final class StreamLayerService: ObservableObject {
-    @Published private(set) var loadError: Error?
+    static let shared = StreamLayerService()
 
+    @Published private(set) var loadError: Error?
+    /// The stream layer to add to the map when useStreamLayer is true. Adding to map auto-loads the data source.
+    @Published private(set) var streamLayer: Layer?
+
+    private init() {}
+
+    /// Loads the stream service and creates a DynamicEntityLayer. The layer will connect when added to the map.
     func load(streamServiceURL: URL) async {
         loadError = nil
-        // TODO: Add ArcGIS Stream Layer when SDK provides the type (e.g. StreamLayer or similar).
-        // For now this is a placeholder; enable "Use Stream Layer" in Settings for future use.
+        streamLayer = nil
+        let streamService = ArcGISStreamService(url: streamServiceURL)
+        let layer = DynamicEntityLayer(dataSource: streamService)
+        streamLayer = layer
+        // DynamicEntityLayer/data source load and connect when the layer is added to the map.
     }
 }

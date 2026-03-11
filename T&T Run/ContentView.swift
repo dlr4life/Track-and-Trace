@@ -2,11 +2,12 @@
 //  ContentView.swift
 //  T&T Run
 //
-//  Root: map, toolbar, theme, iPad split view.
+//  Root: map, toolbar, theme, iPad split view, OAuth authenticator.
 //
 
-import SwiftUI
 import ArcGIS
+import ArcGISToolkit
+import SwiftUI
 
 private enum ContentSheetItem: Identifiable {
     case settings
@@ -16,6 +17,7 @@ private enum ContentSheetItem: Identifiable {
 struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
     @StateObject private var settings = AppSettings.shared
+    @ObservedObject private var authManager = AuthManager.shared
     @State private var presentedSheet: ContentSheetItem?
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
@@ -28,6 +30,10 @@ struct ContentView: View {
             }
         }
         .preferredColorScheme(preferredColorScheme)
+        .authenticator(authManager.authenticator)
+        .task {
+            await authManager.setupPersistentCredentialStorage()
+        }
     }
 
     private var preferredColorScheme: ColorScheme? {

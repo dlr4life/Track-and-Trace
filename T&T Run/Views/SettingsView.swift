@@ -18,10 +18,13 @@ private enum SettingsSheetItem: Identifiable {
 
 struct SettingsView: View {
     @ObservedObject var settings: AppSettings
+    @ObservedObject private var authManager = AuthManager.shared
     @Environment(\.dismiss) private var dismiss
     @StateObject private var geofenceManager = GeofenceManager.shared
     @State private var presentedSheet: SettingsSheetItem?
     @State private var showClearDataAlert = false
+    @State private var showResetOnboardingAlert = false
+    @State private var showOnboardingResetConfirmation = false
     @State private var exportFormat: ExportFormat = .gpx
     @State private var exportedURL: URL?
 
@@ -33,6 +36,7 @@ struct SettingsView: View {
                 mapSection
                 portalSection
                 themeSection
+                onboardingSection
                 powerSaverSection
                 routeSessionSection
                 privacySection
@@ -42,6 +46,10 @@ struct SettingsView: View {
             }
             .navigationTitle(AppCopy.settingsTitle)
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                applyOAuthConfig()
+                authManager.updateSignInState()
+            }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button(AppCopy.doneButton) { dismiss() }
@@ -78,7 +86,35 @@ struct SettingsView: View {
             } message: {
                 Text(String(localized: "This will clear track history, offline queue, and diagnostics. Synced data is not affected."))
             }
+            .alert(String(localized: "Reset onboarding?"), isPresented: $showResetOnboardingAlert) {
+                Button(AppCopy.cancelButton, role: .cancel) {}
+                Button(String(localized: "Reset"), role: .destructive) {
+                    resetOnboarding()
+                }
+            } message: {
+                Text(String(localized: "The onboarding tutorial will show again the next time you open the app."))
+            }
+            .alert(String(localized: "Onboarding reset"), isPresented: $showOnboardingResetConfirmation) {
+                Button(AppCopy.doneButton, role: .cancel) {}
+            } message: {
+                Text(String(localized: "Onboarding has been reset. It will show on the next app restart."))
+            }
         }
+    }
+
+    private var onboardingSection: some View {
+        Section(String(localized: "Onboarding")) {
+            Button(String(localized: "Reset onboarding")) {
+                showResetOnboardingAlert = true
+            }
+            .accessibilityHint(String(localized: "Shows the tutorial again on next app launch"))
+        }
+    }
+
+    private func resetOnboarding() {
+        settings.resetOnboarding()
+        showResetOnboardingAlert = false
+        showOnboardingResetConfirmation = true
     }
 
     private var featureServiceSection: some View {
@@ -121,6 +157,12 @@ struct SettingsView: View {
             }
             Toggle(String(localized: "Use clustering for many assets"), isOn: $settings.useClustering)
             Toggle(String(localized: "Use Stream Layer (low latency)"), isOn: $settings.useStreamLayer)
+            if settings.useStreamLayer {
+                TextField(String(localized: "Stream Service URL"), text: $settings.streamServiceURL)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .keyboardType(.URL)
+            }
         } footer: {
             VStack(alignment: .leading, spacing: 4) {
                 Text(String(localized: "In power saver mode, effective interval is longer."))
@@ -155,11 +197,47 @@ struct SettingsView: View {
                 .autocorrectionDisabled()
                 .keyboardType(.URL)
             Toggle(AppCopy.settingsUseOAuth, isOn: $settings.useOAuth)
+            if settings.useOAuth {
+                TextField(String(localized: "OAuth Client ID"), text: $settings.oauthClientID)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                TextField(String(localized: "OAuth Redirect URL"), text: $settings.oauthRedirectURL)
+                    .textInputAutocapitalization(.never)
+                    .autocorrectionDisabled()
+                    .keyboardType(.URL)
+            }
+            if authManager.isSignedIn, let user = authManager.portalUser {
+                HStack {
+                    Text(String(localized: "Signed in as"))
+                    Spacer()
+                    Text(user)
+                        .foregroundStyle(.secondary)
+                }
+                Button(String(localized: "Sign out"), role: .destructive) {
+                    authManager.signOut()
+                }
+            }
         } header: {
             Text(String(localized: "Portal & sign-in"))
         } footer: {
             Text(AppCopy.settingsPortalURLFooter)
         }
+        .onChange(of: settings.portalURL) { _, _ in applyOAuthConfig() }
+        .onChange(of: settings.useOAuth) { _, _ in applyOAuthConfig() }
+        .onChange(of: settings.oauthClientID) { _, _ in applyOAuthConfig() }
+        .onChange(of: settings.oauthRedirectURL) { _, _ in applyOAuthConfig() }
+    }
+
+    private func applyOAuthConfig() {
+        guard settings.useOAuth else {
+            AuthManager.shared.configureOAuth(portalURL: nil, clientID: nil, redirectURL: nil)
+            return
+        }
+        AuthManager.shared.configureOAuth(
+            portalURL: settings.resolvedPortalURL,
+            clientID: settings.oauthClientID.isEmpty ? nil : settings.oauthClientID,
+            redirectURL: settings.resolvedOauthRedirectURL
+        )
     }
 
     private var themeSection: some View {

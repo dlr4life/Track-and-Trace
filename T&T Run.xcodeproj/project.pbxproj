@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		841D428E2F61189E0093523A /* ArcGIS in Frameworks */ = {isa = PBXBuildFile; productRef = 84782E852F609087000AAADE /* ArcGIS */; };
+		841D42902F61189E0093523C /* ArcGISToolkit in Frameworks */ = {isa = PBXBuildFile; productRef = 84782E872F609087000AAADF /* ArcGISToolkit */; };
 		841D430E2F611A8F0093523A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D42D32F6118D00093523A /* WidgetKit.framework */; };
 		841D430F2F611A8F0093523A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 841D42D52F6118D00093523A /* SwiftUI.framework */; };
 		841D43202F611A900093523A /* T&T_WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 841D430D2F611A8F0093523A /* T&T_WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -86,6 +87,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				841D428E2F61189E0093523A /* ArcGIS in Frameworks */,
+				841D42902F61189E0093523C /* ArcGISToolkit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +168,7 @@
 			name = "T&T Run";
 			packageProductDependencies = (
 				84782E852F609087000AAADE /* ArcGIS */,
+				84782E872F609087000AAADF /* ArcGISToolkit */,
 			);
 			productName = "T&T Run";
 			productReference = 84782E742F609086000AAADE /* T&T Run.app */;
@@ -201,6 +204,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				84782E842F609087000AAADE /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */,
+				84782E862F609087000AAADF /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84782E752F609086000AAADE /* Products */;
@@ -263,7 +267,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "T&T_WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P7QF2Y3H2D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "T&T_Widget/Info.plist";
@@ -294,7 +298,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = "T&T_WidgetExtension.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P7QF2Y3H2D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "T&T_Widget/Info.plist";
@@ -445,11 +449,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P7QF2Y3H2D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_ArcGISAPIKey = "AAPTazwHJJc-r9z5EbkAFEs2dzQ..iI72cCIEDJQFUUEgpVqb_jK3Wc3h6YwMpYoRI4TH_50TQnlKV965QD3Si5hf0UpSHRWqQrioXd9f8WIuGfMZVA_tFg_BG8pluqZmvhCewlUBoTHVfuby2vAG-udJYG2N6GdvuctmwUUm3yhuiaroP6g7z-ax0DzO2US5aRb-xD-gQOZit-eQ3oX8Snr9bk9OsbcftMdfKCEA_Rb3eUUzXUoWQeR3r7yMvXmfVdpvfjH4xDU9pxkIhrc.AT1_AoUWoFdn";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The mapping SDK may reference camera APIs. T&T Run does not use the camera for tracking; this description is required by the system.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is used to track your position and send it to the map when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used to show your position and track on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -486,11 +492,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = P7QF2Y3H2D;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_ArcGISAPIKey = "AAPTazwHJJc-r9z5EbkAFEs2dzQ..iI72cCIEDJQFUUEgpVqb_jK3Wc3h6YwMpYoRI4TH_50TQnlKV965QD3Si5hf0UpSHRWqQrioXd9f8WIuGfMZVA_tFg_BG8pluqZmvhCewlUBoTHVfuby2vAG-udJYG2N6GdvuctmwUUm3yhuiaroP6g7z-ax0DzO2US5aRb-xD-gQOZit-eQ3oX8Snr9bk9OsbcftMdfKCEA_Rb3eUUzXUoWQeR3r7yMvXmfVdpvfjH4xDU9pxkIhrc.AT1_AoUWoFdn";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "The mapping SDK may reference camera APIs. T&T Run does not use the camera for tracking; this description is required by the system.";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Your location is used to track your position and send it to the map when the app is in the background.";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is used to show your position and track on the map.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -562,6 +570,14 @@
 				minimumVersion = 200.0.0;
 			};
 		};
+		84782E862F609087000AAADF /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Esri/arcgis-maps-sdk-swift-toolkit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 200.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -569,6 +585,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84782E842F609087000AAADE /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift" */;
 			productName = ArcGIS;
+		};
+		84782E872F609087000AAADF /* ArcGISToolkit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84782E862F609087000AAADF /* XCRemoteSwiftPackageReference "arcgis-maps-sdk-swift-toolkit" */;
+			productName = ArcGISToolkit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

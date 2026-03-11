@@ -1,5 +1,5 @@
 {
-  "originHash" : "dced1dfaa1d362a7ec6579ed4b01f37f38cdaab4fb89ce9be2cee5e2935e1e92",
+  "originHash" : "3f1ba64bc3f684963808691fc7f74e3a0e774426aeb1c2234a0b871bec5d43d5",
   "pins" : [
     {
       "identity" : "arcgis-maps-sdk-swift",
@@ -8,6 +8,33 @@
       "state" : {
         "revision" : "806abf58d8a28382b0c619c2014f924d428eacfe",
         "version" : "200.8.1"
+      }
+    },
+    {
+      "identity" : "arcgis-maps-sdk-swift-toolkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Esri/arcgis-maps-sdk-swift-toolkit",
+      "state" : {
+        "revision" : "067de0b6297f4838cc127a5bd064ad6b207ee4b9",
+        "version" : "200.8.1"
+      }
+    },
+    {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-cmark.git",
+      "state" : {
+        "revision" : "5d9bdaa4228b381639fff09403e39a04926e2dbe",
+        "version" : "0.7.1"
+      }
+    },
+    {
+      "identity" : "swift-markdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-markdown.git",
+      "state" : {
+        "revision" : "4aae40bf6fff5286e0e1672329d17824ce16e081",
+        "version" : "0.4.0"
       }
     }
   ],

@@ -2,7 +2,7 @@
 //  T_T_RunApp.swift
 //  T&T Run
 //
-//  App entry: ArcGIS API key, managed config, URL scheme for QR/config.
+//  App entry: ArcGIS API key, managed config, URL scheme for QR/config, OAuth challenge handler.
 //
 
 import ArcGIS
@@ -16,12 +16,13 @@ struct T_T_RunApp: SwiftUI.App {
         }
         Task { @MainActor in
             ManagedConfigManager.shared.applyToSettings(AppSettings.shared)
+            AuthManager.shared.applyOAuthConfigFromSettings()
         }
     }
 
     var body: some SwiftUI.Scene {
         WindowGroup {
-            ContentView()
+            RootView()
                 .onOpenURL { url in
                     ManagedConfigManager.applyURL(url, to: AppSettings.shared)
                 }

@@ -81,11 +81,16 @@ final class AppSettings: ObservableObject {
         static let attributeMapping = "app.attributeMapping"
         static let featureServiceConfigs = "app.featureServiceConfigs"
         static let useStreamLayer = "app.useStreamLayer"
+        static let streamServiceURL = "app.streamServiceURL"
         static let privacyNoticeAccepted = "app.privacyNoticeAccepted"
         static let portalURL = "app.portalURL"
         static let useOAuth = "app.useOAuth"
+        static let oauthClientID = "app.oauthClientID"
+        static let oauthRedirectURL = "app.oauthRedirectURL"
         static let useClustering = "app.useClustering"
         static let offlineBasemapPath = "app.offlineBasemapPath"
+        /// When false, onboarding is shown (first launch or after reset). When true, user has completed onboarding.
+        static let showOnboarding = "app.showOnboarding"
     }
 
     /// Feature Service URL for track/asset layer (legacy single service). Empty = sync disabled.
@@ -165,6 +170,11 @@ final class AppSettings: ObservableObject {
         didSet { defaults.set(useStreamLayer, forKey: Keys.useStreamLayer) }
     }
 
+    /// Stream service URL for real-time layer (when useStreamLayer is true).
+    @Published var streamServiceURL: String {
+        didSet { defaults.set(streamServiceURL, forKey: Keys.streamServiceURL) }
+    }
+
     /// User has accepted the in-app privacy notice.
     @Published var privacyNoticeAccepted: Bool {
         didSet { defaults.set(privacyNoticeAccepted, forKey: Keys.privacyNoticeAccepted) }
@@ -180,6 +190,16 @@ final class AppSettings: ObservableObject {
         didSet { defaults.set(useOAuth, forKey: Keys.useOAuth) }
     }
 
+    /// OAuth client ID (from portal app registration). Required for OAuth sign-in.
+    @Published var oauthClientID: String {
+        didSet { defaults.set(oauthClientID, forKey: Keys.oauthClientID) }
+    }
+
+    /// OAuth redirect URL (must match portal app registration).
+    @Published var oauthRedirectURL: String {
+        didSet { defaults.set(oauthRedirectURL, forKey: Keys.oauthRedirectURL) }
+    }
+
     /// Use feature clustering when many assets are visible.
     @Published var useClustering: Bool {
         didSet { defaults.set(useClustering, forKey: Keys.useClustering) }
@@ -188,6 +208,11 @@ final class AppSettings: ObservableObject {
     /// Path to offline basemap package (e.g. .tpk or .vtpk) when available.
     @Published var offlineBasemapPath: String {
         didSet { defaults.set(offlineBasemapPath, forKey: Keys.offlineBasemapPath) }
+    }
+
+    /// When false, show onboarding (first-time or after reset). When true, onboarding is completed and will not show until reset.
+    @Published var showOnboarding: Bool {
+        didSet { defaults.set(showOnboarding, forKey: Keys.showOnboarding) }
     }
 
     init() {
@@ -215,11 +240,41 @@ final class AppSettings: ObservableObject {
             self.featureServiceConfigs = []
         }
         self.useStreamLayer = defaults.bool(forKey: Keys.useStreamLayer)
+        self.streamServiceURL = defaults.string(forKey: Keys.streamServiceURL) ?? ""
         self.privacyNoticeAccepted = defaults.bool(forKey: Keys.privacyNoticeAccepted)
         self.portalURL = defaults.string(forKey: Keys.portalURL) ?? ""
         self.useOAuth = defaults.bool(forKey: Keys.useOAuth)
+        self.oauthClientID = defaults.string(forKey: Keys.oauthClientID) ?? ""
+        self.oauthRedirectURL = defaults.string(forKey: Keys.oauthRedirectURL) ?? ""
         self.useClustering = defaults.bool(forKey: Keys.useClustering)
         self.offlineBasemapPath = defaults.string(forKey: Keys.offlineBasemapPath) ?? ""
+        self.showOnboarding = defaults.object(forKey: Keys.showOnboarding) as? Bool ?? false
+    }
+
+    /// Resets onboarding so it will show on next app launch. Call from Settings "Reset Onboarding".
+    func resetOnboarding() {
+        showOnboarding = false
+    }
+
+    /// Resolved portal URL for OAuth; nil if empty or invalid.
+    var resolvedPortalURL: URL? {
+        let trimmed = portalURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, let url = URL(string: trimmed) else { return nil }
+        return url
+    }
+
+    /// Resolved OAuth redirect URL; nil if empty or invalid.
+    var resolvedOauthRedirectURL: URL? {
+        let trimmed = oauthRedirectURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, let url = URL(string: trimmed) else { return nil }
+        return url
+    }
+
+    /// Resolved stream service URL for StreamLayer; nil if empty or invalid.
+    var resolvedStreamServiceURL: URL? {
+        let trimmed = streamServiceURL.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, let url = URL(string: trimmed) else { return nil }
+        return url
     }
 
     /// Resolved feature service URL for sync (legacy single URL); nil if empty or invalid.

@@ -183,6 +183,28 @@ final class TrackMapViewModel: ObservableObject {
         map.basemap = Basemap(style: style)
     }
 
+    /// When settings.offlineBasemapPath points to a .tpk or .vtpk file, use it as the basemap.
+    private func applyOfflineBasemapIfNeeded() {
+        let path = settings.offlineBasemapPath.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !path.isEmpty else { return }
+        let fileURL: URL
+        if path.hasPrefix("/") || path.contains("://") {
+            guard let url = URL(string: path.hasPrefix("/") ? "file://" + path : path) else { return }
+            fileURL = url
+        } else {
+            guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent(path) else { return }
+            fileURL = url
+        }
+        guard FileManager.default.fileExists(atPath: fileURL.path) else { return }
+        let ext = fileURL.pathExtension.lowercased()
+        if ext == "tpk" || ext == "tpkx" {
+            let cache = TileCache(fileURL: fileURL)
+            let layer = ArcGISTiledLayer(tileCache: cache)
+            map.basemap = Basemap(baseLayer: layer)
+        }
+        // .vtpk (vector tile package): use ArcGISVectorTiledLayer when your SDK version supports it.
+    }
+
     func setScenePhase(_ phase: ScenePhase) {
         switch phase {
         case .background:
@@ -203,6 +225,8 @@ final class TrackMapViewModel: ObservableObject {
     func setup() async {
         if isRunningInPreview { return }
 
+        applyOfflineBasemapIfNeeded()
+
         let manager = CLLocationManager()
         if manager.authorizationStatus == .notDetermined {
             locationManager.requestAuthorization()
@@ -221,7 +245,13 @@ final class TrackMapViewModel: ObservableObject {
 
         startTrackPolylineObserver()
 
-        // When StreamLayerService is implemented, load stream layer here when settings.useStreamLayer is true.
+        if settings.useStreamLayer, let streamURL = settings.resolvedStreamServiceURL {
+            await StreamLayerService.shared.load(streamServiceURL: streamURL)
+            if let layer = StreamLayerService.shared.streamLayer {
+                map.addOperationalLayer(layer)
+            }
+        }
+
         locationManager.startUpdatingLocation()
         isTracking = true
         updateWidgetState()
