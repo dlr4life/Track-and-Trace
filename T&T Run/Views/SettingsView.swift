@@ -44,7 +44,7 @@ struct SettingsView: View {
                 dataSection
                 aboutSection
             }
-            .navigationTitle(AppCopy.settingsTitle)
+            .navigationTitle(String(localized: "Settings"))
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 applyOAuthConfig()
@@ -52,7 +52,7 @@ struct SettingsView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(AppCopy.doneButton) { dismiss() }
+                    Button(String(localized: "Done")) { dismiss() }
                 }
             }
             .sheet(item: $presentedSheet) { item in
@@ -70,7 +70,7 @@ struct SettingsView: View {
                             .navigationTitle(String(localized: "Diagnostics"))
                             .toolbar {
                                 ToolbarItem(placement: .confirmationAction) {
-                                    Button(AppCopy.doneButton) { presentedSheet = nil }
+                                    Button(String(localized: "Done")) { presentedSheet = nil }
                                 }
                             }
                     }
@@ -79,15 +79,15 @@ struct SettingsView: View {
                 }
             }
             .alert(String(localized: "Clear local data?"), isPresented: $showClearDataAlert) {
-                Button(AppCopy.cancelButton, role: .cancel) {}
-                Button(AppCopy.clearButton, role: .destructive) {
+                Button(String(localized: "Cancel"), role: .cancel) {}
+                Button(String(localized: "Clear"), role: .destructive) {
                     clearAllLocalData()
                 }
             } message: {
                 Text(String(localized: "This will clear track history, offline queue, and diagnostics. Synced data is not affected."))
             }
             .alert(String(localized: "Reset onboarding?"), isPresented: $showResetOnboardingAlert) {
-                Button(AppCopy.cancelButton, role: .cancel) {}
+                Button(String(localized: "Cancel"), role: .cancel) {}
                 Button(String(localized: "Reset"), role: .destructive) {
                     resetOnboarding()
                 }
@@ -95,7 +95,7 @@ struct SettingsView: View {
                 Text(String(localized: "The onboarding tutorial will show again the next time you open the app."))
             }
             .alert(String(localized: "Onboarding reset"), isPresented: $showOnboardingResetConfirmation) {
-                Button(AppCopy.doneButton, role: .cancel) {}
+                Button(String(localized: "Done"), role: .cancel) {}
             } message: {
                 Text(String(localized: "Onboarding has been reset. It will show on the next app restart."))
             }
@@ -362,9 +362,9 @@ struct SettingsView: View {
             AttributeMappingView(mapping: $settings.attributeMapping)
                 .navigationTitle(String(localized: "Attribute mapping"))
                 .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button(AppCopy.doneButton) { onDismiss() }
-                    }
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(String(localized: "Done")) { onDismiss() }
+                }
                 }
         }
     }
@@ -393,7 +393,7 @@ struct SettingsView: View {
             .navigationTitle(String(localized: "Export track"))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(AppCopy.cancelButton) { onDismiss() }
+                    Button(String(localized: "Cancel")) { onDismiss() }
                 }
             }
         }
@@ -552,7 +552,7 @@ struct GeofenceEditorView: View {
             .navigationTitle(String(localized: "Add geofence"))
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(AppCopy.cancelButton) { dismiss() }
+                    Button(String(localized: "Cancel")) { dismiss() }
                 }
             }
         }
@@ -567,8 +567,8 @@ struct DiagnosticsView: View {
     var body: some View {
         List {
             Section(String(localized: "Sync stats")) {
-                Text(String(localized: "Attempts: \(diag.syncAttempts)"))
-                Text(String(localized: "Success rate: \(Int(diag.syncSuccessRate * 100))%"))
+                Text(String(format: String(localized: "Attempts: %d"), diag.syncAttempts))
+                Text(String(format: String(localized: "Success rate: %d%%"), Int(diag.syncSuccessRate * 100)))
             }
             Section(String(localized: "Recent log")) {
                 ForEach(diag.entries.prefix(50)) { e in
@@ -588,6 +588,7 @@ struct DiagnosticsView: View {
                     let log = DiagnosticsManager.shared.exportLog()
                     UIPasteboard.general.string = log
                 }
+                .accessibilityHint(String(localized: "Copies log to clipboard."))
             }
         }
     }

@@ -52,6 +52,46 @@ enum AppCopy {
     static let pointsQueuedFormat = "%d queued"
     static let syncRepeatedFailureMessage = "Sync repeatedly failing. Check network and settings."
 
+    // MARK: - Map tools
+    static let toolsErrorTitle = "Tools Error"
+    static let okButton = "OK"
+    static let locateMe = "Locate me"
+    static let geocodeTitle = "Geocode"
+    static let routeTitle = "Route"
+    static let bufferTitle = "Buffer"
+    static let searchButton = "Search"
+    static let solveButton = "Solve"
+    static let applyButton = "Apply"
+    static let addressPlaceholder = "Address or place"
+    static let fromPlaceholder = "From (or leave blank for current location)"
+    static let toPlaceholder = "To address"
+    static let distanceLabel = "Distance"
+    static let distancePlaceholder = "Meters or miles"
+    static let bufferRangeHint = "Range: 10 m – 100 mi"
+    static let bufferSheetHint = "Buffer will be created around your current location. Enter a number (meters) or e.g. \"2 mi\" for miles."
+    static let searchingLabel = "Searching…"
+    static let geocodeAccLabel = "Geocode address"
+    static let findRouteAccLabel = "Find route"
+    static let createBufferAccLabel = "Create buffer"
+
+    // MARK: - Layout & navigation
+    static let homeTitle = "Home"
+    static let mapOnTheRight = "Map on the right"
+    static let addLayer = "Add layer"
+    static let newLayer = "New layer"
+    static let editLayer = "Edit layer"
+    static let layerDetails = "Layer details"
+    static let resetButton = "Reset"
+    static let addButton = "Add"
+
+    // MARK: - Status & onboarding
+    static let trackingReadyHint = "Open Map to start tracking"
+    static let quickActionsTitle = "Quick actions"
+    static let statusSectionTitle = "Status"
+    static let mapSubtitle = "Track and view your route"
+    static let settingsSubtitle = "Feature service, theme, export"
+    static let diagnosticsExportHint = "Copies log to clipboard."
+
     // MARK: - Accessibility
     static let accSettingsButton = "Open settings"
     static let accMapView = "Track and trace map"

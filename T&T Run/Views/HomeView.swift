@@ -54,7 +54,7 @@ struct HomeView: View {
                 } label: {
                     quickActionRow(
                         icon: "map.fill",
-                        title: String(localized: "Map"),
+                        title: AppCopy.mapTitle,
                         subtitle: String(localized: "Track and view your route")
                     )
                 }
