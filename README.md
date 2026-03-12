@@ -30,9 +30,10 @@ Track & Trace for the field. A mobile app that shows your live position on a map
 |:---:|:---:|
 | ![Screenshot 7](Images/7.PNG) | ![Screenshot 8](Images/8.PNG) |
 
-| Screenshot 9 | Screenshot 10 |
+| Screenshot 9 |
 |:---:|:---:|
-| ![Screenshot 9](Images/9.PNG) | ![Screenshot 10](Images/10.PNG) |
+| ![Screenshot 9](Images/9.PNG) |
+
 ---
 
 ## Requirements
